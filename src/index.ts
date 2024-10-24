@@ -1,7 +1,7 @@
-import {makeBanners} from "./game/Banner";
-import {Position} from "./game/Position";
+import {Game} from "./game/Game";
 
-const banners = makeBanners(5, i => new Position(i, i));
-console.log(banners);
-
-console.log(Promise.all(banners.map(b => b.load())));
+window.addEventListener("load", async () => {
+    const game = new Game(document.getElementById("game"));
+    await game.load();
+    game.draw();
+});

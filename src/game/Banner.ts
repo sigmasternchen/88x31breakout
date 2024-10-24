@@ -6,10 +6,14 @@ import {Position} from "./Position";
 export class Banner {
     private readonly position: Position;
     private readonly banner: string;
+    public readonly element: HTMLElement;
 
     constructor(position: Position, banner: string) {
         this.position = position;
         this.banner = banner;
+
+        this.element = document.createElement("img");
+        this.element.classList.add("banner");
     }
 
     public load(): Promise<void> {
@@ -18,6 +22,7 @@ export class Banner {
             image.onload = () => resolve();
             image.onerror = reject;
             image.src = "static/banners/" + this.banner;
+            this.element.setAttribute("src", image.src);
         })
     }
 }
