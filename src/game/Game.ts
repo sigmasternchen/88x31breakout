@@ -7,7 +7,7 @@ export class Game {
 
     constructor(root: HTMLElement) {
         this.root = root;
-        this.banners = makeBanners(5, i => new Position(i * 88, i));
+        this.banners = makeBanners(11 * 6, i => new Position((i % 11) * (88 + 1), (0 | (i / 11)) * (31 + 1)));
     }
 
     public load(): Promise<void> {

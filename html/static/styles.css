@@ -1,6 +1,6 @@
 
 #game {
-    width: 1000px;
+    width: calc((88px + 1px) * 11 + 1px);
     height: 500px;
     background-color: red;
     position: relative;
