@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node src/build/esbuild.config.js"
+    "build": "node src/build/esbuild.config.js",
+    "watch": "node src/build/esbuild.config.js --watch"
   },
   "repository": {
     "type": "git",
