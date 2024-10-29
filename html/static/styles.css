@@ -2,11 +2,21 @@
 #game {
     width: calc((88px + 1px) * 11 + 1px);
     height: 500px;
-    background-color: red;
+    background-color: grey;
     position: relative;
 }
 
 .banner {
     margin: 1px;
     position: absolute;
+}
+
+.paddle {
+    position: absolute;
+    bottom: 20px;
+    height: 10px;
+    transform: translate(-50%, 0);
+    background-color: #333;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
 }
