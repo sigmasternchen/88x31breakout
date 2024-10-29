@@ -1,9 +1,6 @@
-
 #game {
-    width: calc((88px + 1px) * 11 + 1px);
-    height: 500px;
-    background-color: grey;
     position: relative;
+    border: solid 1px black;
 }
 
 .banner {
@@ -14,11 +11,16 @@
 
 .paddle {
     position: absolute;
-    bottom: 20px;
-    height: 10px;
     transform: translate(-50%, 0);
     background-color: #333;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
     pointer-events: none;
+}
+
+.ball {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    border-radius: 50%;
 }
