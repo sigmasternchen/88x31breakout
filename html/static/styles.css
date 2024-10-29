@@ -9,6 +9,7 @@
 .banner {
     margin: 1px;
     position: absolute;
+    pointer-events: none;
 }
 
 .paddle {
@@ -19,4 +20,5 @@
     background-color: #333;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
+    pointer-events: none;
 }
