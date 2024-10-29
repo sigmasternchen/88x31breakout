@@ -17,10 +17,8 @@ export class Game {
         return Promise.all(this.banners.map(banner => banner.load())).then(() => {});
     }
 
-    public draw(): void {
-        this.banners.forEach(banner => {
-            this.root.appendChild(banner.element);
-        });
-        this.root.appendChild(this.paddle.element);
+    public setup(): void {
+        this.banners.forEach(banner => banner.setup(this.root));
+        this.paddle.setup(this.root);
     }
 }

@@ -6,7 +6,7 @@ import {Position} from "./Position";
 export class Banner {
     private readonly position: Position;
     private readonly banner: string;
-    public readonly element: HTMLElement;
+    private readonly element: HTMLElement;
 
     constructor(position: Position, banner: string) {
         this.position = position;
@@ -26,6 +26,10 @@ export class Banner {
             image.src = "static/banners/" + this.banner;
             this.element.setAttribute("src", image.src);
         })
+    }
+
+    public setup(gameElement: HTMLElement): void {
+        gameElement.appendChild(this.element);
     }
 }
 
