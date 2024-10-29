@@ -14,6 +14,8 @@ export class Banner {
 
         this.element = document.createElement("img");
         this.element.classList.add("banner");
+        this.element.style.top = this.position.y + "px";
+        this.element.style.left = this.position.x + "px";
     }
 
     public load(): Promise<void> {
