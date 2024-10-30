@@ -24,21 +24,21 @@ export class Ball {
         this._position = position;
     }
 
-    public redraw(): void {
+    public readonly redraw = (): void => {
         this.element.style.left = this._position.x + "px";
         this.element.style.top = this._position.y + "px";
     }
 
-    public setup(gameElement: HTMLElement): void {
+    public readonly setup = (gameElement: HTMLElement): void => {
         gameElement.appendChild(this.element);
     }
 
-    public launch() {
+    public readonly launch = (): void => {
         this.phi = choice(startAngles);
         this.speed = defaultBallSpeed;
     }
 
-    public tick(delta: number) {
+    public readonly tick = (delta: number): void => {
         this._position = this._position.moveInDirection(this.phi, this.speed * delta / 1000);
         this.redraw();
     }

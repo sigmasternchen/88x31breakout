@@ -22,7 +22,7 @@ export class Paddle {
         this.redraw();
     }
 
-    private redraw() {
+    private readonly redraw = (): void => {
         this.element.style.left = this.position + "px";
         this.element.style.width = this.size + "px";
 
@@ -32,7 +32,7 @@ export class Paddle {
         }
     }
 
-    private mouseHandler(event: MouseEvent) {
+    private readonly mouseHandler = (event: MouseEvent): void => {
         this.position =
             Math.min(fieldWidth - this.size / 2,
             Math.max(this.size / 2, event.offsetX)
@@ -41,11 +41,11 @@ export class Paddle {
         this.redraw();
     }
 
-    public setup(gameElement: HTMLElement, ballLaunchHandler: (ball: Ball) => void): void {
+    public readonly setup = (gameElement: HTMLElement, ballLaunchHandler: (ball: Ball) => void): void => {
         gameElement.appendChild(this.element);
-        gameElement.addEventListener("mousemove", this.mouseHandler.bind(this));
-        gameElement.addEventListener("mouseenter", this.mouseHandler.bind(this));
-        gameElement.addEventListener("mouseleave", this.mouseHandler.bind(this));
+        gameElement.addEventListener("mousemove", this.mouseHandler);
+        gameElement.addEventListener("mouseenter", this.mouseHandler);
+        gameElement.addEventListener("mouseleave", this.mouseHandler);
 
         gameElement.addEventListener("click", () => {
             if (this.ball) {

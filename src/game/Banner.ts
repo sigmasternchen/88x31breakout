@@ -18,7 +18,7 @@ export class Banner {
         this.element.style.left = this.position.x + "px";
     }
 
-    public load(): Promise<void> {
+    public readonly load = (): Promise<void> => {
         return new Promise<void>((resolve, reject) => {
             const image = new Image();
             image.onload = () => resolve();
@@ -28,7 +28,7 @@ export class Banner {
         })
     }
 
-    public setup(gameElement: HTMLElement): void {
+    public readonly setup = (gameElement: HTMLElement): void => {
         gameElement.appendChild(this.element);
     }
 }

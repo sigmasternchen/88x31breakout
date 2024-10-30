@@ -23,33 +23,32 @@ export class Game {
         this.balls = [];
     }
 
-    public load(): Promise<void> {
-        return Promise.all(this.banners.map(banner => banner.load())).then(() => {});
-    }
+    public readonly load = (): Promise<void> =>
+        Promise.all(this.banners.map(banner => banner.load())).then(() => {});
 
-    public setup(): void {
+    public readonly setup = (): void => {
         this.banners.forEach(banner => banner.setup(this.root));
-        this.paddle.setup(this.root, this.ballLaunchHandler.bind(this));
+        this.paddle.setup(this.root, this.ballLaunchHandler);
         this.balls.forEach(ball => ball.setup(this.root));
     }
 
-    private ballLaunchHandler(ball: Ball): void {
+    private readonly ballLaunchHandler = (ball: Ball): void => {
         this.balls.push(ball);
         ball.launch();
     }
 
-    public run(): void {
+    public readonly run = (): void => {
         this.running = true;
-        requestAnimationFrame(this.tick.bind(this))
+        requestAnimationFrame(this.tick)
     }
 
-    private tick(timestamp: number): void {
+    private readonly tick = (timestamp: number): void => {
         const delta = timestamp - this.lastTickTimestamp;
         this.lastTickTimestamp = timestamp;
 
-        this.balls.forEach(ball => ball.tick.bind(ball)(delta));
+        this.balls.forEach(ball => ball.tick(delta));
         if (this.running) {
-            requestAnimationFrame(this.tick.bind(this));
+            requestAnimationFrame(this.tick);
         }
     }
 }

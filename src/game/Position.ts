@@ -16,10 +16,9 @@ export class Position {
         return this._y;
     }
 
-    public moveInDirection(phi: number, distance: number): Position {
-        return new Position(
+    public readonly moveInDirection = (phi: number, distance: number): Position =>
+        new Position(
             this._x + Math.cos(phi) * distance,
             this._y - Math.sin(phi) * distance
         );
-    }
 }
