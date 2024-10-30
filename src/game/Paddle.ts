@@ -41,11 +41,19 @@ export class Paddle {
         this.redraw();
     }
 
-    public setup(gameElement: HTMLElement): void {
+    public setup(gameElement: HTMLElement, ballLaunchHandler: (ball: Ball) => void): void {
         gameElement.appendChild(this.element);
         gameElement.addEventListener("mousemove", this.mouseHandler.bind(this));
         gameElement.addEventListener("mouseenter", this.mouseHandler.bind(this));
         gameElement.addEventListener("mouseleave", this.mouseHandler.bind(this));
+
+        gameElement.addEventListener("click", () => {
+            if (this.ball) {
+                const ball = this.ball;
+                this.ball = null;
+                ballLaunchHandler(ball);
+            }
+        });
 
         if (this.ball) {
             this.ball.setup(gameElement);

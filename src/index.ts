@@ -4,4 +4,5 @@ window.addEventListener("load", async () => {
     const game = new Game(document.getElementById("game"));
     await game.load();
     game.setup();
+    game.run();
 });

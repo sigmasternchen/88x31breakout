@@ -10,6 +10,9 @@ export class Game {
     private paddle: Paddle;
     private balls: Ball[];
 
+    private running: boolean = false;
+    private lastTickTimestamp: number = 0;
+
     constructor(root: HTMLElement) {
         this.root = root;
         this.root.style.height = fieldHeight + "px";
@@ -26,7 +29,27 @@ export class Game {
 
     public setup(): void {
         this.banners.forEach(banner => banner.setup(this.root));
-        this.paddle.setup(this.root);
+        this.paddle.setup(this.root, this.ballLaunchHandler.bind(this));
         this.balls.forEach(ball => ball.setup(this.root));
+    }
+
+    private ballLaunchHandler(ball: Ball): void {
+        this.balls.push(ball);
+        ball.launch();
+    }
+
+    public run(): void {
+        this.running = true;
+        requestAnimationFrame(this.tick.bind(this))
+    }
+
+    private tick(timestamp: number): void {
+        const delta = timestamp - this.lastTickTimestamp;
+        this.lastTickTimestamp = timestamp;
+
+        this.balls.forEach(ball => ball.tick.bind(ball)(delta));
+        if (this.running) {
+            requestAnimationFrame(this.tick.bind(this));
+        }
     }
 }

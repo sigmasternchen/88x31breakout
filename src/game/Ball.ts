@@ -1,8 +1,12 @@
 import {Position} from "./Position";
 import {ballSize} from "./geometry";
+import {choice} from "../utils";
+import {defaultBallSpeed, startAngles} from "./parameters";
 
 export class Ball {
     private _position: Position;
+    private phi: number;
+    private speed: number;
     private readonly element: HTMLElement;
 
     constructor() {
@@ -27,5 +31,15 @@ export class Ball {
 
     public setup(gameElement: HTMLElement): void {
         gameElement.appendChild(this.element);
+    }
+
+    public launch() {
+        this.phi = choice(startAngles);
+        this.speed = defaultBallSpeed;
+    }
+
+    public tick(delta: number) {
+        this._position = this._position.moveInDirection(this.phi, this.speed * delta / 1000);
+        this.redraw();
     }
 }

@@ -7,8 +7,12 @@ export function shuffleInPlace(array: any[]) {
     }
 }
 
-export function toShuffled <T> (array: T[]) {
+export function toShuffled <T> (array: T[]): T[] {
     const copy = [...array];
     shuffleInPlace(copy);
     return copy;
+}
+
+export function choice <T> (array: T[]): T {
+    return array[0 | (Math.random() * array.length)];
 }
