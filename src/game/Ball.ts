@@ -3,11 +3,16 @@ import {ballSize} from "./geometry";
 import {choice} from "../utils";
 import {defaultBallSpeed, startAngles} from "./parameters";
 
+const sameWallCollisionTimeout: number = 50;
+
 export class Ball {
     public position: Position;
     private phi: number;
     private speed: number;
     private readonly element: HTMLElement;
+
+    private lastCollisionWallAngle: number;
+    private lastCollisionTimestamp: number;
 
     constructor() {
         this.position = new Position(0, 0);
@@ -41,7 +46,14 @@ export class Ball {
     }
 
     public readonly collision = (wallAngle: number): void => {
+        if (wallAngle == this.lastCollisionWallAngle && (Date.now() - this.lastCollisionTimestamp) < sameWallCollisionTimeout) {
+            return;
+        }
+
         this.phi = 2 * wallAngle - this.phi;
         this.phi -= (0|(this.phi / (Math.PI*2))) * Math.PI * 2;
+
+        this.lastCollisionWallAngle = wallAngle;
+        this.lastCollisionTimestamp = Date.now();
     }
 }
