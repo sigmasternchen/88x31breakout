@@ -59,6 +59,11 @@ export class Game {
     private readonly handleCollisions = (ball: Ball): void => {
         this.handleEdgeCollisions(ball);
         this.paddle.handleCollisions(ball);
+
+        const toDelete = this.banners.filter(banner => banner.handleCollisions(ball));
+        toDelete.forEach(banner => banner.remove(this.root));
+
+        this.banners = this.banners.filter(banner => !toDelete.includes(banner));
     }
 
     private readonly handleEdgeCollisions = (ball: Ball): void => {

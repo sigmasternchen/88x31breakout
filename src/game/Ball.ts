@@ -26,7 +26,6 @@ export class Ball {
     }
 
     public readonly redraw = (): void => {
-        console.log(this.phi / Math.PI, this.position.x, this.position.y);
         this.element.style.left = this.position.x + "px";
         this.element.style.top = this.position.y + "px";
     }
