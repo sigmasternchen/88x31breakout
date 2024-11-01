@@ -59,4 +59,17 @@ export class Paddle {
             this.ball.setup(gameElement);
         }
     }
+
+    public readonly handleCollisions = (ball: Ball): void => {
+        if (
+            ball.position.y + ballSize / 2 > paddleY &&
+            ball.position.x + ballSize / 2 > this.position - this.size / 2 &&
+            ball.position.x - ballSize / 2 < this.position + this.size / 2
+        ) {
+            const t = (ball.position.x - this.position + this.size / 2) / this.size;
+            const phi = (t - 0.5) * -2 * Math.PI / 8;
+
+            ball.collision(phi);
+        }
+    }
 }

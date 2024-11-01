@@ -58,6 +58,7 @@ export class Game {
 
     private readonly handleCollisions = (ball: Ball): void => {
         this.handleEdgeCollisions(ball);
+        this.paddle.handleCollisions(ball);
     }
 
     private readonly handleEdgeCollisions = (ball: Ball): void => {
