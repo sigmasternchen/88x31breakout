@@ -46,9 +46,29 @@ export class Game {
         const delta = timestamp - this.lastTickTimestamp;
         this.lastTickTimestamp = timestamp;
 
-        this.balls.forEach(ball => ball.tick(delta));
+        this.balls.forEach(ball => {
+            ball.tick(delta);
+            this.handleCollisions(ball);
+        });
+
         if (this.running) {
             requestAnimationFrame(this.tick);
+        }
+    }
+
+    private readonly handleCollisions = (ball: Ball): void => {
+        this.handleEdgeCollisions(ball);
+    }
+
+    private readonly handleEdgeCollisions = (ball: Ball): void => {
+        if (ball.position.x < 0) {
+            ball.collision(Math.PI / 2);
+        } else if (ball.position.x >= fieldWidth) {
+            ball.collision(Math.PI / 2);
+        } else if (ball.position.y < 0) {
+            ball.collision(0);
+        } else if (ball.position.y >= fieldHeight) {
+            ball.collision(0);
         }
     }
 }

@@ -4,7 +4,7 @@ import {choice} from "../utils";
 import {defaultBallSpeed, startAngles} from "./parameters";
 
 export class Ball {
-    private _position: Position;
+    public position: Position;
     private phi: number;
     private speed: number;
     private readonly element: HTMLElement;
@@ -20,13 +20,10 @@ export class Ball {
         this.redraw();
     }
 
-    set position(position: Position) {
-        this._position = position;
-    }
-
     public readonly redraw = (): void => {
-        this.element.style.left = this._position.x + "px";
-        this.element.style.top = this._position.y + "px";
+        console.log(this.phi / Math.PI, this.position.x, this.position.y);
+        this.element.style.left = this.position.x + "px";
+        this.element.style.top = this.position.y + "px";
     }
 
     public readonly setup = (gameElement: HTMLElement): void => {
@@ -39,7 +36,12 @@ export class Ball {
     }
 
     public readonly tick = (delta: number): void => {
-        this._position = this._position.moveInDirection(this.phi, this.speed * delta / 1000);
+        this.position = this.position.moveInDirection(this.phi, this.speed * delta / 1000);
         this.redraw();
+    }
+
+    public readonly collision = (wallAngle: number): void => {
+        this.phi = 2 * wallAngle - this.phi;
+        this.phi -= (0|(this.phi / (Math.PI*2))) * Math.PI * 2;
     }
 }
