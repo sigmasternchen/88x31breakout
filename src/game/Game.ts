@@ -2,7 +2,7 @@ import {Banner, makeBanners} from "./Banner";
 import {Position} from "./Position";
 import {Paddle} from "./Paddle";
 import {Ball} from "./Ball";
-import {fieldHeight, fieldWidth} from "./geometry";
+import {ballSize, fieldHeight, fieldWidth} from "./geometry";
 
 export class Game {
     private readonly root: HTMLElement;
@@ -61,13 +61,13 @@ export class Game {
     }
 
     private readonly handleEdgeCollisions = (ball: Ball): void => {
-        if (ball.position.x < 0) {
+        if (ball.position.x - ballSize / 2 < 0) {
             ball.collision(Math.PI / 2);
-        } else if (ball.position.x >= fieldWidth) {
+        } else if (ball.position.x + ballSize / 2 >= fieldWidth) {
             ball.collision(Math.PI / 2);
-        } else if (ball.position.y < 0) {
+        } else if (ball.position.y - ballSize / 2 < 0) {
             ball.collision(0);
-        } else if (ball.position.y >= fieldHeight) {
+        } else if (ball.position.y + ballSize / 2 >= fieldHeight) {
             ball.collision(0);
         }
     }
