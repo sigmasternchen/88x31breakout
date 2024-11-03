@@ -22,7 +22,7 @@ export class Paddle {
         this.redraw();
     }
 
-    private readonly redraw = (): void => {
+    public readonly redraw = (): void => {
         this.element.style.left = this.position + "px";
         this.element.style.width = this.size + "px";
 
@@ -37,8 +37,6 @@ export class Paddle {
             Math.min(fieldWidth - this.size / 2,
             Math.max(this.size / 2, event.offsetX)
         );
-
-        this.redraw();
     }
 
     public readonly setup = (gameElement: HTMLElement, ballLaunchHandler: (ball: Ball) => void): void => {

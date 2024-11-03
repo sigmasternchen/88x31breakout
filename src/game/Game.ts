@@ -51,6 +51,8 @@ export class Game {
             this.handleCollisions(ball);
         });
 
+        this.paddle.redraw();
+
         if (this.running) {
             requestAnimationFrame(this.tick);
         }
