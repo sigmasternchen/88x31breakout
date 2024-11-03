@@ -34,6 +34,10 @@ export class Ball {
         gameElement.appendChild(this.element);
     }
 
+    public readonly remove = (gameElement: HTMLElement): void => {
+        gameElement.removeChild(this.element);
+    }
+
     public readonly launch = (): void => {
         this.phi = choice(startAngles);
         this.speed = defaultBallSpeed;

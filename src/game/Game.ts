@@ -74,7 +74,8 @@ export class Game {
         } else if (ball.position.y - ballSize / 2 < 0) {
             ball.collision(0);
         } else if (ball.position.y + ballSize / 2 >= fieldHeight) {
-            ball.collision(0);
+            ball.remove(this.root);
+            this.balls = this.balls.filter(_ball => _ball != ball);
         }
     }
 }
